@@ -1,0 +1,13 @@
+Tiny app to redirect outgoing calls to Signal or Telegram if available.
+
+You can cancel redirection by clicking on "Redirecting" popup.
+
+Permissions:
+* ACCESS_NETWORK_STATE - check internet is available
+* CALL_PHONE           - make a call via messenger
+* READ_CONTACTS        - check contact has a messenger record
+* SYSTEM_ALERT_WINDOW  - show redirecting popup and launch an activity from background
+* CALL_REDIRECTION     - process outgoing call
+
+It is Free Open Source Software.
+License: GPL-3
