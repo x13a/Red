@@ -1,4 +1,4 @@
-package me.lucky.re
+package me.lucky.red
 
 import android.app.Application
 import com.google.android.material.color.DynamicColors

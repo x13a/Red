@@ -1,4 +1,4 @@
-package me.lucky.re
+package me.lucky.red
 
 import android.Manifest
 import android.app.role.RoleManager
@@ -9,7 +9,7 @@ import android.provider.Settings
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 
-import me.lucky.re.databinding.ActivityMainBinding
+import me.lucky.red.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     companion object {

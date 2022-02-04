@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Re</string>
-    <string name="description">The app will try to redirect outgoing calls to Signal or Telegram if available. For work it will require many permissions. Click on toggle and grant permissions until it turns ON.</string>
-    <string name="info">Redirecting</string>
+    <string name="app_name">Red</string>
+    <string name="description">The app will try to redirect outgoing calls to Signal/Telegram if available. For work it requires many permissions. Click on the toggle and grant permissions until it turns ON.</string>
+    <string name="popup">Redirecting to %1$s</string>
+    <string name="signal">Signal</string>
+    <string name="telegram">Telegram</string>
 </resources>

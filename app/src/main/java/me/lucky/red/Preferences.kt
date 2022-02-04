@@ -1,4 +1,4 @@
-package me.lucky.re
+package me.lucky.red
 
 import android.content.Context
 import androidx.core.content.edit

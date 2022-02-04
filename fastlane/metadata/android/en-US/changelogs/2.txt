@@ -1,0 +1,4 @@
+rename to Red
+show redirection destination
+fix dialer end call
+add priority Signal > Telegram

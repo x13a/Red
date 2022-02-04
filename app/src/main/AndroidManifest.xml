@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="me.lucky.re">
+    package="me.lucky.red">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
@@ -9,14 +9,12 @@
     <uses-feature android:name="android.hardware.telephony" android:required="true" />
 
     <application
-        android:allowBackup="true"
-        android:fullBackupContent="true"
         android:icon="@mipmap/ic_launcher"
         android:name=".Application"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Re">
+        android:theme="@style/Theme.Red">
 
         <activity
             android:name=".MainActivity"

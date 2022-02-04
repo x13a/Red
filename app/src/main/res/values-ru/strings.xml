@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Re</string>
-    <string name="description">Приложение будет от всей души пытаться перенаправить исходящие вызовы в Сигнал или Телеграм, но иногда у него может не получаться. Для работы ему нужны тонны разрешений. Кликайте на переключатель и выдавайте разрешения пока он не включится.</string>
-    <string name="info">Перенаправление</string>
+    <string name="app_name">Red</string>
+    <string name="description">Приложение будет пытаться перенаправить исходящие вызовы в Signal/Telegram. Для работы ему нужно много разрешений. Кликайте на переключатель и выдавайте разрешения пока он не включится.</string>
+    <string name="popup">Перенаправление в %1$s</string>
+    <string name="signal">Signal</string>
+    <string name="telegram">Telegram</string>
 </resources>
