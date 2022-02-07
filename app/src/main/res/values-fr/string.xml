@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Red</string>
+    <string name="description">L\'application essaiera de rediriger les appels sortants vers Signal/Telegram/Threema s\'ils sont disponibles. Pour fonctionner, l\'application nécessite de nombreuses permissions. Cliquez sur le bouton et accordez les autorisations nécéssaires jusqu\'à ce qu\'il soit activé.</string>
+    <string name="popup">Redirection vers %1$s</string>
+    <string name="destination_signal">Signal</string>
+    <string name="destination_telegram">Telegram</string>
+    <string name="destination_threema">Threema</string>
+    <string name="redirection_delay_description">Délai avant qu\'un appel ne soit redirigé.</string>
+</resources>

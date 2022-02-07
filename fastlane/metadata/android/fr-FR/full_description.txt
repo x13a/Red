@@ -1,0 +1,15 @@
+Petite application redirigereant les appels sortants vers Signal/Telegram/Threema si ils sont disponibles.
+
+Vous pouvez annuler la redirection en cliquant sur la fenêtre contextuelle "Redirection vers...".
+
+Autorisations:
+* ACCESS_NETWORK_STATE - Vérifié la disponibilité d\'accès à internet
+* CALL_PHONE           - Passer un appel via messenger
+* READ_CONTACTS        - Vérifier que le contact a un enregistreur de message
+* SYSTEM_ALERT_WINDOW  - Afficher une fenêtre contextuelle de redirection et lancer une activité en arrière-plan
+* CALL_REDIRECTION     - Traiter les appels sortants
+
+Toutes les autorisations sont obligatoires.
+
+C'est un logiciel libre et gratuit.
+Licence : GPL-3

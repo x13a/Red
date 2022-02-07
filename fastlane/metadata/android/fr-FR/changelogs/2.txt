@@ -1,0 +1,4 @@
+renommer en Red
+afficher la destination de la redirection
+corriger la fin d'appel du numéroteur
+ajout de la priorisation Signal > Télégram
