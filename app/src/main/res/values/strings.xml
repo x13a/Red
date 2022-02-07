@@ -5,4 +5,5 @@
     <string name="popup">Redirecting to %1$s</string>
     <string name="signal">Signal</string>
     <string name="telegram">Telegram</string>
+    <string name="redirection_delay_description">Delay before a call will be redirected.</string>
 </resources>

@@ -44,12 +44,19 @@ class MainActivity : AppCompatActivity() {
         prefs = Preferences(this)
         roleManager = getSystemService(RoleManager::class.java)
         binding.apply {
+            redirectionDelay.value = (prefs.redirectionDelay / 1000).toFloat()
             toggle.isChecked = prefs.isServiceEnabled
         }
     }
 
     private fun setup() {
         binding.apply {
+            redirectionDelay.setLabelFormatter {
+                String.format("%.1f", it)
+            }
+            redirectionDelay.addOnChangeListener { _, value, _ ->
+                prefs.redirectionDelay = (value * 1000).toLong()
+            }
             toggle.setOnCheckedChangeListener { _, isChecked ->
                 if (isChecked && !hasPermissions()) {
                     toggle.isChecked = false

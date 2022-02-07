@@ -14,10 +14,6 @@ import java.util.*
 import kotlin.concurrent.timerTask
 
 class PopupWindow(private val service: CallRedirectionService) {
-    companion object {
-        private const val CANCEL_DELAY = 2000L
-    }
-
     private val windowManager = service
         .applicationContext
         .getSystemService(WindowManager::class.java)
@@ -41,9 +37,8 @@ class PopupWindow(private val service: CallRedirectionService) {
 
     init {
         view.setOnClickListener {
-            timer?.cancel()
+            cancel()
             service.placeCallUnmodified()
-            remove()
         }
     }
 
@@ -70,7 +65,7 @@ class PopupWindow(private val service: CallRedirectionService) {
                 return@timerTask
             }
             service.cancelCall()
-        }, CANCEL_DELAY)
+        }, service.prefs.redirectionDelay)
         view.findViewById<TextView>(R.id.description).text = String.format(
             service.getString(R.string.popup),
             service.getString(destinationId),
@@ -103,5 +98,10 @@ class PopupWindow(private val service: CallRedirectionService) {
         } catch (exc: IllegalArgumentException) {
         } catch (exc: WindowManager.BadTokenException) { return false }
         return true
+    }
+
+    fun cancel() {
+        timer?.cancel()
+        remove()
     }
 }

@@ -21,13 +21,18 @@ class CallRedirectionService : CallRedirectionService() {
         )
     }
 
-    private lateinit var prefs: Preferences
+    lateinit var prefs: Preferences
     private lateinit var window: PopupWindow
     private var connectivityManager: ConnectivityManager? = null
 
     override fun onCreate() {
         super.onCreate()
         init()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        window.cancel()
     }
 
     private fun init() {
