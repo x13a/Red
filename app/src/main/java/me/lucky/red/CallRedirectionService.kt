@@ -15,9 +15,12 @@ class CallRedirectionService : CallRedirectionService() {
             "vnd.android.cursor.item/vnd.org.thoughtcrime.securesms.call"
         private const val TELEGRAM_MIMETYPE =
             "vnd.android.cursor.item/vnd.org.telegram.messenger.android.call"
+        private const val THREEMA_MIMETYPE =
+            "vnd.android.cursor.item/vnd.ch.threema.app.call"
         private val MIMETYPES = mapOf(
             SIGNAL_MIMETYPE to 0,
             TELEGRAM_MIMETYPE to 1,
+            THREEMA_MIMETYPE to 2,
         )
     }
 
@@ -63,8 +66,9 @@ class CallRedirectionService : CallRedirectionService() {
             return
         }
         window.show(record.uri, when (record.mimetype) {
-            SIGNAL_MIMETYPE -> R.string.signal
-            TELEGRAM_MIMETYPE -> R.string.telegram
+            SIGNAL_MIMETYPE -> R.string.destination_signal
+            TELEGRAM_MIMETYPE -> R.string.destination_telegram
+            THREEMA_MIMETYPE -> R.string.destination_threema
             else -> return
         })
     }

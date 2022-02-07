@@ -1,4 +1,4 @@
-Tiny app to redirect outgoing calls to Signal/Telegram if available.
+Tiny app to redirect outgoing calls to Signal/Telegram/Threema if available.
 
 You can cancel redirection by clicking on "Redirecting to.." popup.
 

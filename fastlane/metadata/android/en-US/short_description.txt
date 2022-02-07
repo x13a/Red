@@ -1,1 +1,1 @@
-Redirect outgoing calls to Signal/Telegram
+Redirect outgoing calls to Signal/Telegram/Threema

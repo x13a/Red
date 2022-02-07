@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Red</string>
-    <string name="description">Приложение будет пытаться перенаправить исходящие вызовы в Signal/Telegram. Для работы ему нужно много разрешений. Кликайте на переключатель и выдавайте разрешения пока он не включится.</string>
+    <string name="description">Приложение будет пытаться перенаправить исходящие вызовы в Signal/Telegram/Threema. Для работы ему нужно много разрешений. Кликайте на переключатель и выдавайте разрешения пока он не включится.</string>
     <string name="popup">Перенаправление в %1$s</string>
-    <string name="signal">Signal</string>
-    <string name="telegram">Telegram</string>
+    <string name="destination_signal">Signal</string>
+    <string name="destination_telegram">Telegram</string>
+    <string name="destination_threema">Threema</string>
     <string name="redirection_delay_description">Задержка до того, как звонок будет перенаправлен.</string>
 </resources>

@@ -1,6 +1,6 @@
 # Red
 
-Redirect outgoing calls to Signal/Telegram.
+Redirect outgoing calls to Signal/Telegram/Threema.
 
 [<img
      src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png"
@@ -16,7 +16,7 @@ Redirect outgoing calls to Signal/Telegram.
      width="30%" 
      height="30%">
 
-Tiny app to redirect outgoing calls to Signal/Telegram if available.
+Tiny app to redirect outgoing calls to Signal/Telegram/Threema if available.
 
 You can cancel redirection by clicking on `Redirecting to..` popup.
 
