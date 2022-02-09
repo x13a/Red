@@ -1,1 +1,3 @@
 support Threema
+redirection delay selector
+French translation, thanks to @Ilithy
