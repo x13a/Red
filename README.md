@@ -2,10 +2,13 @@
 
 Redirect outgoing calls to Signal/Telegram/Threema.
 
-[<img
-     src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png"
-     alt="Get it on F-Droid"
-     height="80">](https://f-droid.org/packages/me.lucky.red/)
+[comment]: <> ([<img)
+
+[comment]: <> (     src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png")
+
+[comment]: <> (     alt="Get it on F-Droid")
+
+[comment]: <> (     height="80">]&#40;https://f-droid.org/packages/me.lucky.red/&#41;)
 [<img
       src="https://play.google.com/intl/en_us/badges/images/generic/en-play-badge.png"
       alt="Get it on Google Play"
