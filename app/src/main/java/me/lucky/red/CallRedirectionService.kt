@@ -11,12 +11,10 @@ import androidx.annotation.RequiresPermission
 
 class CallRedirectionService : CallRedirectionService() {
     companion object {
-        private const val SIGNAL_MIMETYPE =
-            "vnd.android.cursor.item/vnd.org.thoughtcrime.securesms.call"
-        private const val TELEGRAM_MIMETYPE =
-            "vnd.android.cursor.item/vnd.org.telegram.messenger.android.call"
-        private const val THREEMA_MIMETYPE =
-            "vnd.android.cursor.item/vnd.ch.threema.app.call"
+        private const val PREFIX = "vnd.android.cursor.item/vnd"
+        private const val SIGNAL_MIMETYPE = "$PREFIX.org.thoughtcrime.securesms.call"
+        private const val TELEGRAM_MIMETYPE = "$PREFIX.org.telegram.messenger.android.call"
+        private const val THREEMA_MIMETYPE = "$PREFIX.ch.threema.app.call"
         private val MIMETYPES = mapOf(
             SIGNAL_MIMETYPE to 0,
             TELEGRAM_MIMETYPE to 1,
