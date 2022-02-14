@@ -48,6 +48,7 @@ class MainActivity : AppCompatActivity() {
         binding.apply {
             redirectionDelay.value = (prefs.redirectionDelay / 1000).toFloat()
             popupPosition.editText?.setText(prefs.popupPosition.toString())
+            fallback.isChecked = prefs.isFallbackChecked
             toggle.isChecked = prefs.isServiceEnabled
         }
     }
@@ -64,6 +65,9 @@ class MainActivity : AppCompatActivity() {
                 try {
                     prefs.popupPosition = it?.toString()?.toInt() ?: return@doAfterTextChanged
                 } catch (exc: NumberFormatException) {}
+            }
+            fallback.setOnCheckedChangeListener { _, isChecked ->
+                prefs.isFallbackChecked = isChecked
             }
             toggle.setOnCheckedChangeListener { _, isChecked ->
                 if (isChecked && !hasPermissions()) {

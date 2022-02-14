@@ -8,4 +8,8 @@
     <string name="destination_threema">Threema</string>
     <string name="redirection_delay_description">Delay before a call will be redirected.</string>
     <string name="popup_position">Popup position</string>
+    <string name="fallback">Fallback</string>
+    <string name="fallback_description">Redirect to WhatsApp/Viber if no other available.</string>
+    <string name="fallback_destination_whatsapp">WhatsApp</string>
+    <string name="fallback_destination_viber">Viber</string>
 </resources>

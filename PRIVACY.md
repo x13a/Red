@@ -9,4 +9,9 @@ please read them at:
 
 Signal: https://signal.org/legal/#privacy-policy  
 Telegram: https://telegram.org/privacy  
-Threema: https://threema.ch/privacy_policy/  
+Threema: https://threema.ch/privacy_policy/
+
+Fallback services:
+
+WhatsApp: https://www.whatsapp.com/privacy
+Viber: https://www.viber.com/en/terms/viber-privacy-policy/
