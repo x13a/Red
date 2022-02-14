@@ -7,4 +7,5 @@
     <string name="destination_telegram">Telegram</string>
     <string name="destination_threema">Threema</string>
     <string name="redirection_delay_description">Задержка до того, как звонок будет перенаправлен.</string>
+    <string name="popup_position">Позиция всплывающего окна</string>
 </resources>

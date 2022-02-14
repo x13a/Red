@@ -8,6 +8,8 @@ import android.os.Bundle
 import android.provider.Settings
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.widget.doAfterTextChanged
+import java.lang.NumberFormatException
 
 import me.lucky.red.databinding.ActivityMainBinding
 
@@ -45,6 +47,7 @@ class MainActivity : AppCompatActivity() {
         roleManager = getSystemService(RoleManager::class.java)
         binding.apply {
             redirectionDelay.value = (prefs.redirectionDelay / 1000).toFloat()
+            popupPosition.editText?.setText(prefs.popupPosition.toString())
             toggle.isChecked = prefs.isServiceEnabled
         }
     }
@@ -56,6 +59,11 @@ class MainActivity : AppCompatActivity() {
             }
             redirectionDelay.addOnChangeListener { _, value, _ ->
                 prefs.redirectionDelay = (value * 1000).toLong()
+            }
+            popupPosition.editText?.doAfterTextChanged {
+                try {
+                    prefs.popupPosition = it?.toString()?.toInt() ?: return@doAfterTextChanged
+                } catch (exc: NumberFormatException) {}
             }
             toggle.setOnCheckedChangeListener { _, isChecked ->
                 if (isChecked && !hasPermissions()) {

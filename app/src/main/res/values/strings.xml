@@ -7,4 +7,5 @@
     <string name="destination_telegram">Telegram</string>
     <string name="destination_threema">Threema</string>
     <string name="redirection_delay_description">Delay before a call will be redirected.</string>
+    <string name="popup_position">Popup position</string>
 </resources>

@@ -31,7 +31,7 @@ class PopupWindow(private val service: CallRedirectionService) {
         gravity = Gravity.BOTTOM
         width = WindowManager.LayoutParams.WRAP_CONTENT
         height = WindowManager.LayoutParams.WRAP_CONTENT
-        y = 333
+        y = service.prefs.popupPosition
     }
     private var timer: Timer? = null
 
