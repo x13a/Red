@@ -23,6 +23,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var prefs: Preferences
+    private lateinit var window: PopupWindow
     private var roleManager: RoleManager? = null
 
     private val registerForCallRedirectionRole =
@@ -42,14 +43,20 @@ class MainActivity : AppCompatActivity() {
         setup()
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        window.cancel()
+    }
+
     private fun init() {
         prefs = Preferences(this)
+        window = PopupWindow(this, null)
         roleManager = getSystemService(RoleManager::class.java)
         binding.apply {
             redirectionDelay.value = (prefs.redirectionDelay / 1000).toFloat()
             popupPosition.editText?.setText(prefs.popupPosition.toString())
             fallback.isChecked = prefs.isFallbackChecked
-            toggle.isChecked = prefs.isServiceEnabled
+            toggle.isChecked = prefs.isEnabled
         }
     }
 
@@ -60,6 +67,9 @@ class MainActivity : AppCompatActivity() {
             }
             redirectionDelay.addOnChangeListener { _, value, _ ->
                 prefs.redirectionDelay = (value * 1000).toLong()
+            }
+            popupPosition.setEndIconOnClickListener {
+                window.preview()
             }
             popupPosition.editText?.doAfterTextChanged {
                 try {
@@ -75,7 +85,7 @@ class MainActivity : AppCompatActivity() {
                     requestPermissions()
                     return@setOnCheckedChangeListener
                 }
-                prefs.isServiceEnabled = isChecked
+                prefs.isEnabled = isChecked
             }
         }
     }

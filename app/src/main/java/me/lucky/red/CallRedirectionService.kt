@@ -8,6 +8,7 @@ import android.provider.ContactsContract
 import android.telecom.CallRedirectionService
 import android.telecom.PhoneAccountHandle
 import androidx.annotation.RequiresPermission
+import java.lang.ref.WeakReference
 
 class CallRedirectionService : CallRedirectionService() {
     companion object {
@@ -16,7 +17,7 @@ class CallRedirectionService : CallRedirectionService() {
         private const val TELEGRAM_MIMETYPE = "$PREFIX/vnd.org.telegram.messenger.android.call"
         private const val THREEMA_MIMETYPE = "$PREFIX/vnd.ch.threema.app.call"
         private const val WHATSAPP_MIMETYPE = "$PREFIX/vnd.com.whatsapp.voip.call"
-        private val MIMETYPES = mapOf(
+        private val MIMETYPE_TO_WEIGHT = mapOf(
             SIGNAL_MIMETYPE to 0,
             TELEGRAM_MIMETYPE to 1,
             THREEMA_MIMETYPE to 2,
@@ -25,9 +26,15 @@ class CallRedirectionService : CallRedirectionService() {
         private val FALLBACK_MIMETYPES = arrayOf(
             WHATSAPP_MIMETYPE,
         )
+        private val MIMETYPE_TO_DST_NAME = mapOf(
+            SIGNAL_MIMETYPE to R.string.destination_signal,
+            TELEGRAM_MIMETYPE to R.string.destination_telegram,
+            THREEMA_MIMETYPE to R.string.destination_threema,
+            WHATSAPP_MIMETYPE to R.string.fallback_destination_whatsapp,
+        )
     }
 
-    lateinit var prefs: Preferences
+    private lateinit var prefs: Preferences
     private lateinit var window: PopupWindow
     private var connectivityManager: ConnectivityManager? = null
 
@@ -43,7 +50,7 @@ class CallRedirectionService : CallRedirectionService() {
 
     private fun init() {
         prefs = Preferences(this)
-        window = PopupWindow(this)
+        window = PopupWindow(this, WeakReference(this))
         connectivityManager = getSystemService(ConnectivityManager::class.java)
     }
 
@@ -52,7 +59,7 @@ class CallRedirectionService : CallRedirectionService() {
         initialPhoneAccount: PhoneAccountHandle,
         allowInteractiveResponse: Boolean,
     ) {
-        if (!prefs.isServiceEnabled || !hasInternet() || !allowInteractiveResponse) {
+        if (!prefs.isEnabled || !hasInternet() || !allowInteractiveResponse) {
             placeCallUnmodified()
             return
         }
@@ -63,18 +70,12 @@ class CallRedirectionService : CallRedirectionService() {
             placeCallUnmodified()
             return
         }
-        val record = records.minByOrNull { MIMETYPES[it.mimetype] ?: 0 }
+        val record = records.minByOrNull { MIMETYPE_TO_WEIGHT[it.mimetype] ?: 0 }
         if (record == null || (record.mimetype in FALLBACK_MIMETYPES && !prefs.isFallbackChecked)) {
             placeCallUnmodified()
             return
         }
-        window.show(record.uri, when (record.mimetype) {
-            SIGNAL_MIMETYPE -> R.string.destination_signal
-            TELEGRAM_MIMETYPE -> R.string.destination_telegram
-            THREEMA_MIMETYPE -> R.string.destination_threema
-            WHATSAPP_MIMETYPE -> R.string.fallback_destination_whatsapp
-            else -> return
-        })
+        window.show(record.uri, MIMETYPE_TO_DST_NAME[record.mimetype] ?: return)
     }
 
     @RequiresPermission(Manifest.permission.READ_CONTACTS)
@@ -83,7 +84,7 @@ class CallRedirectionService : CallRedirectionService() {
         val cursor = contentResolver.query(
             Uri.withAppendedPath(
                 ContactsContract.PhoneLookup.CONTENT_FILTER_URI,
-                Uri.encode(phoneNumber)
+                Uri.encode(phoneNumber),
             ),
             arrayOf(ContactsContract.PhoneLookup._ID),
             null,
@@ -109,8 +110,8 @@ class CallRedirectionService : CallRedirectionService() {
             arrayOf(ContactsContract.Data._ID, ContactsContract.Data.MIMETYPE),
              "${ContactsContract.Data.CONTACT_ID} = ? AND " +
                      "${ContactsContract.Data.MIMETYPE} IN " +
-                     "(${MIMETYPES.keys.joinToString(",") { "?" }})",
-            arrayOf(contactId, *MIMETYPES.keys.toTypedArray()),
+                     "(${MIMETYPE_TO_WEIGHT.keys.joinToString(",") { "?" }})",
+            arrayOf(contactId, *MIMETYPE_TO_WEIGHT.keys.toTypedArray()),
             null,
         )
         cursor?.apply {

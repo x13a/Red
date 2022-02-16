@@ -1,6 +1,7 @@
 package me.lucky.red
 
 import android.Manifest
+import android.content.Context
 import android.content.Intent
 import android.graphics.PixelFormat
 import android.media.AudioManager
@@ -10,20 +11,19 @@ import android.view.LayoutInflater
 import android.view.WindowManager
 import android.widget.TextView
 import androidx.annotation.RequiresPermission
+import java.lang.ref.WeakReference
 import java.util.*
 import kotlin.concurrent.timerTask
 
-class PopupWindow(private val service: CallRedirectionService) {
-    private val windowManager = service
-        .applicationContext
-        .getSystemService(WindowManager::class.java)
-    private val audioManager = service
-        .applicationContext
-        .getSystemService(AudioManager::class.java)
+class PopupWindow(
+    private val ctx: Context,
+    private val service: WeakReference<CallRedirectionService>?,
+) {
+    private val prefs = Preferences(ctx)
+    private val windowManager = ctx.getSystemService(WindowManager::class.java)
+    private val audioManager = ctx.getSystemService(AudioManager::class.java)
     @Suppress("InflateParams")
-    private val view = LayoutInflater
-        .from(service.applicationContext)
-        .inflate(R.layout.popup, null)
+    private val view = LayoutInflater.from(ctx).inflate(R.layout.popup, null)
     private val layoutParams = WindowManager.LayoutParams().apply {
         format = PixelFormat.TRANSLUCENT
         flags = WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
@@ -31,18 +31,32 @@ class PopupWindow(private val service: CallRedirectionService) {
         gravity = Gravity.BOTTOM
         width = WindowManager.LayoutParams.WRAP_CONTENT
         height = WindowManager.LayoutParams.WRAP_CONTENT
-        y = service.prefs.popupPosition
+        y = prefs.popupPosition
     }
     private var timer: Timer? = null
 
     init {
         view.setOnClickListener {
             cancel()
-            service.placeCallUnmodified()
+            service?.get()?.placeCallUnmodified()
         }
     }
 
+    fun preview() {
+        remove()
+        layoutParams.y = prefs.popupPosition
+        val destinations = mutableListOf(
+            R.string.destination_signal,
+            R.string.destination_telegram,
+            R.string.destination_threema,
+        )
+        if (prefs.isFallbackChecked) destinations.add(R.string.fallback_destination_whatsapp)
+        setDescription(destinations.random())
+        add()
+    }
+
     fun show(uri: Uri, destinationId: Int) {
+        val service = service?.get() ?: return
         if (!remove()) {
             service.placeCallUnmodified()
             return
@@ -65,15 +79,19 @@ class PopupWindow(private val service: CallRedirectionService) {
                 return@timerTask
             }
             service.cancelCall()
-        }, service.prefs.redirectionDelay)
-        view.findViewById<TextView>(R.id.description).text = String.format(
-            service.getString(R.string.popup),
-            service.getString(destinationId),
-        )
+        }, prefs.redirectionDelay)
+        setDescription(destinationId)
         if (!add()) {
             timer?.cancel()
             service.placeCallUnmodified()
         }
+    }
+
+    private fun setDescription(id: Int) {
+        view.findViewById<TextView>(R.id.description).text = ctx.getString(
+            R.string.popup,
+            ctx.getString(id),
+        )
     }
 
     @RequiresPermission(Manifest.permission.CALL_PHONE)
@@ -81,7 +99,7 @@ class PopupWindow(private val service: CallRedirectionService) {
         Intent(Intent.ACTION_VIEW).let {
             it.data = data
             it.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-            service.startActivity(it)
+            ctx.startActivity(it)
         }
     }
 

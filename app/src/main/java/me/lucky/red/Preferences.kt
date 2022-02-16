@@ -6,20 +6,23 @@ import androidx.preference.PreferenceManager
 
 class Preferences(ctx: Context) {
     companion object {
-        private const val SERVICE_ENABLED = "service_enabled"
+        private const val ENABLED = "enabled"
         private const val REDIRECTION_DELAY = "redirection_delay"
         private const val POPUP_POSITION = "popup_position_y"
         private const val FALLBACK_CHECKED = "fallback_checked"
 
         private const val DEFAULT_REDIRECTION_DELAY = 2000L
         private const val DEFAULT_POPUP_POSITION = 333
+
+        // migration
+        private const val SERVICE_ENABLED = "service_enabled"
     }
 
     private val prefs = PreferenceManager.getDefaultSharedPreferences(ctx)
 
-    var isServiceEnabled: Boolean
-        get() = prefs.getBoolean(SERVICE_ENABLED, false)
-        set(value) = prefs.edit { putBoolean(SERVICE_ENABLED, value) }
+    var isEnabled: Boolean
+        get() = prefs.getBoolean(ENABLED, prefs.getBoolean(SERVICE_ENABLED, false))
+        set(value) = prefs.edit { putBoolean(ENABLED, value) }
 
     var redirectionDelay: Long
         get() = prefs.getLong(REDIRECTION_DELAY, DEFAULT_REDIRECTION_DELAY)

@@ -55,6 +55,8 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/popupPosition"
+                app:endIconMode="custom"
+                app:endIconDrawable="@drawable/ic_baseline_check_circle_24"
                 android:hint="@string/popup_position"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
