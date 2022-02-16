@@ -9,7 +9,6 @@
     <string name="redirection_delay_description">Задержка до того, как звонок будет перенаправлен.</string>
     <string name="popup_position">Позиция всплывающего окна</string>
     <string name="fallback">Обратная совместимость</string>
-    <string name="fallback_description">Перенаправлять в WhatsApp/Viber, если другие недоступны.</string>
+    <string name="fallback_description">Перенаправлять в WhatsApp, если другие недоступны.</string>
     <string name="fallback_destination_whatsapp">WhatsApp</string>
-    <string name="fallback_destination_viber">Viber</string>
 </resources>

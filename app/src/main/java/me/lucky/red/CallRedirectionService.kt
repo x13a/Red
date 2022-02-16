@@ -11,22 +11,19 @@ import androidx.annotation.RequiresPermission
 
 class CallRedirectionService : CallRedirectionService() {
     companion object {
-        private const val PREFIX = "vnd.android.cursor.item/vnd"
-        private const val SIGNAL_MIMETYPE = "$PREFIX.org.thoughtcrime.securesms.call"
-        private const val TELEGRAM_MIMETYPE = "$PREFIX.org.telegram.messenger.android.call"
-        private const val THREEMA_MIMETYPE = "$PREFIX.ch.threema.app.call"
-        private const val WHATSAPP_MIMETYPE = "$PREFIX.com.whatsapp.voip.call"
-        private const val VIBER_MIMETYPE = "$PREFIX.com.viber.voip.call"
+        private const val PREFIX = "vnd.android.cursor.item"
+        private const val SIGNAL_MIMETYPE = "$PREFIX/vnd.org.thoughtcrime.securesms.call"
+        private const val TELEGRAM_MIMETYPE = "$PREFIX/vnd.org.telegram.messenger.android.call"
+        private const val THREEMA_MIMETYPE = "$PREFIX/vnd.ch.threema.app.call"
+        private const val WHATSAPP_MIMETYPE = "$PREFIX/vnd.com.whatsapp.voip.call"
         private val MIMETYPES = mapOf(
             SIGNAL_MIMETYPE to 0,
             TELEGRAM_MIMETYPE to 1,
             THREEMA_MIMETYPE to 2,
             WHATSAPP_MIMETYPE to 48,
-            VIBER_MIMETYPE to 49,
         )
         private val FALLBACK_MIMETYPES = arrayOf(
             WHATSAPP_MIMETYPE,
-            VIBER_MIMETYPE,
         )
     }
 
@@ -76,7 +73,6 @@ class CallRedirectionService : CallRedirectionService() {
             TELEGRAM_MIMETYPE -> R.string.destination_telegram
             THREEMA_MIMETYPE -> R.string.destination_threema
             WHATSAPP_MIMETYPE -> R.string.fallback_destination_whatsapp
-            VIBER_MIMETYPE -> R.string.fallback_destination_viber
             else -> return
         })
     }

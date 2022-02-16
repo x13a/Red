@@ -14,4 +14,3 @@ Threema: https://threema.ch/privacy_policy/
 Fallback services:
 
 WhatsApp: https://www.whatsapp.com/privacy
-Viber: https://www.viber.com/en/terms/viber-privacy-policy/
